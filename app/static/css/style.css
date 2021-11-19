@@ -1,0 +1,37 @@
+body{
+	font-family: Roboto;
+	background-color: #483248;
+	color: black;
+	height: 100%;
+}
+#title {
+	color: #FF9900;
+	font-size: 60pt;
+}
+#usernameFld {
+	size: 35;
+}
+#usernameTxt {
+	font-size: 30pt;
+}
+
+#passwordFld {
+	size: 35;
+}
+#passwordTxt {
+	font-size: 30pt;
+}
+#loginBtn {
+	background-color: #FF9900;
+	color: #FFFFFF;
+}
+
+#mainMenu {
+	color:#FFFFFF;
+	font-size: 70pt;
+}
+#logout {
+	background-color: #FF3333;
+	color:#FFFFFF;
+}
+
