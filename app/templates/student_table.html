@@ -31,7 +31,7 @@
 					var r = confirm("Confirm deletion?");
 					if (r == true){
 						var currentRow = $(this).closest('tr').find("#student_id").text();
-						$.post('http://127.0.0.1:5000/student_table/delete', {currentRow}, function(){
+						$.post('http://127.0.0.1:5000/main_menu/student_table/student_delete', {currentRow}, function(){
 						});
 						table.row($(this).parents('tr')).remove().draw();
 					};
@@ -99,7 +99,7 @@
 					{% endfor %}
 				 </tbody>
 					 <div id="edit_dialog" title="Edit Student">
-						<form action="/student_table/edit" method="post">
+						<form action="/main_menu/student_table/student_edit" method="post">
 							<div class="row">
 								<div class="col-4">
 									<label>Student ID:</label>

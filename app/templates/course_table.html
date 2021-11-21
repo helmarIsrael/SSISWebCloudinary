@@ -30,7 +30,7 @@
 					var r = confirm("Confirm deletion?");
 					if (r == true){
 						var currentRow = $(this).closest('tr').find("#course_code").text();
-						$.post('http://127.0.0.1:5000/course_table/delete', {currentRow}, function(){
+						$.post('http://127.0.0.1:5000/main_menu/course_table/course_delete', {currentRow}, function(){
 						});
 						table.row($(this).parents('tr')).remove().draw();
 					};
@@ -89,7 +89,7 @@
 					{% endfor %}
 				 </tbody>
 					 <div id="edit_dialog" title="Edit Course">
-						<form action="/course_table/edit" method="post">
+						<form action="/main_menu/course_table/course_edit" method="post">
 							<div class="row">
 								<div class="col-4">
 									<label>Course Code:</label>

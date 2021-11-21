@@ -1,19 +1,19 @@
 from flask import Blueprint, render_template, redirect, request
 import mysql.connector
 
-db = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    passwd="root",
-    database="student_database"
-)
-
-mycursor = db.cursor(buffered=True)
-
 course = Blueprint('course', __name__, url_prefix='/main_menu/course_table')
 
 @course.route('/course_add', methods=['post','get'])
 def index():
+    db = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        passwd="root",
+        database="student_database"
+    )
+
+    mycursor = db.cursor(buffered=True)
+
     mycursor.execute('SELECT `Name` FROM college')
     data = mycursor.fetchall()
     if request.method == 'POST' and 'course_code' in request.form:
@@ -28,3 +28,43 @@ def index():
     else:
         pass
     return render_template('course_add.html', data=data)
+
+@course.route('/course_edit', methods=['post','get'])
+def course_edit():
+    db = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        passwd="root",
+        database="student_database"
+    )
+
+    mycursor = db.cursor(buffered=True)
+
+    if request.method == 'POST' and "code" in request.form:
+        code = request.form['code']
+        name = request.form['name']
+        college = request.form['college']
+
+        query2 = f"UPDATE `course` SET `Course Code` = '{code}', `Course Name` = '{name}', `College` = '{college}' WHERE `Course Code` = '{code}'"
+        mycursor.execute(query2)
+        db.commit()
+        return redirect("/main_menu/course_table")
+    return redirect("/main_menu/course_table")
+
+@course.route('/course_delete', methods=['post','get'])
+def course_delete():
+    db = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        passwd="root",
+        database="student_database"
+    )
+
+    mycursor = db.cursor(buffered=True)
+
+    if request.method == 'POST':
+        course_code = request.form['currentRow']
+        f = f"DELETE FROM course WHERE `Course Code` = '{course_code}'"
+        mycursor.execute(f)
+        db.commit()
+    return course_code
