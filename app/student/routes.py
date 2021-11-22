@@ -14,19 +14,24 @@ def index():
 
     mycursor = db.cursor(buffered=True)
 
+    mycursor.execute('SELECT `Course Name` FROM course')
+    data = mycursor.fetchall()
+
     if request.method == 'POST' and 'student_id' in request.form:
         student_id = request.form['student_id']
         name = request.form['name']
         year_level = request.form['year_level']
         gender = request.form['gender']
+        course = request.form['course']
         mycursor.execute("INSERT INTO `student_info` (`Student ID`, `Name`, `Year Level`, `Gender`, `Course`) "
                          "VALUES (%s,%s,%s,%s,%s)",
-                         (student_id, name, year_level, gender, code2))
+                         (student_id, name, year_level, gender, course))
         db.commit()
         return redirect("/main_menu/student_table")
     else:
         pass
     return render_template('student_add.html', data=data)
+
 
 @student.route('/student_edit', methods=['post','get'])
 def student_edit():
