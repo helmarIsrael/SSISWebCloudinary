@@ -1,16 +1,23 @@
 from flask import Blueprint, render_template, redirect, request
 import mysql.connector
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
+HOST = os.getenv('DB_HOST')
+USERNAME = os.getenv('DB_USERNAME')
+PASSWORD = os.getenv('DB_PASSWORD')
+NAME = os.getenv('DB_NAME')
 
 college = Blueprint('college', __name__, url_prefix='/main_menu/college_table')
 
 @college.route('/college_add', methods=['post','get'])
 def index():
     db = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        passwd="root",
-        database="student_database"
+        host=HOST,
+        user=USERNAME,
+        passwd=PASSWORD,
+        database=NAME
     )
 
     mycursor = db.cursor(buffered=True)
@@ -30,12 +37,11 @@ def index():
 @college.route('/college_edit', methods=['post','get'])
 def college_edit():
     db = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        passwd="root",
-        database="student_database"
+        host=HOST,
+        user=USERNAME,
+        passwd=PASSWORD,
+        database=NAME
     )
-
     mycursor = db.cursor(buffered=True)
 
     if request.method == 'POST' and "code" in request.form:
@@ -51,10 +57,10 @@ def college_edit():
 @college.route('/college_delete', methods=['post','get'])
 def college_delete():
     db = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        passwd="root",
-        database="student_database"
+        host=HOST,
+        user=USERNAME,
+        passwd=PASSWORD,
+        database=NAME
     )
 
     mycursor = db.cursor(buffered=True)

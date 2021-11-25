@@ -1,14 +1,13 @@
 from flask import Blueprint, render_template, redirect, request
 import mysql.connector
+import os
+from dotenv import load_dotenv
 
-db = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    passwd="root",
-    database="student_database"
-)
-
-mycursor = db.cursor(buffered=True)
+load_dotenv()
+HOST = os.getenv('DB_HOST')
+USERNAME = os.getenv('DB_USERNAME')
+PASSWORD = os.getenv('DB_PASSWORD')
+NAME = os.getenv('DB_NAME')
 
 main_menu = Blueprint('main_menu', __name__, url_prefix='/main_menu')
 
@@ -19,10 +18,10 @@ def index():
 @main_menu.route('/student_table', methods=['post','get'])
 def students():
     db = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        passwd="root",
-        database="student_database"
+        host=HOST,
+        user=USERNAME,
+        passwd=PASSWORD,
+        database=NAME
     )
 
     mycursor = db.cursor(buffered=True)
@@ -33,10 +32,10 @@ def students():
 @main_menu.route('/course_table', methods=['post','get'])
 def course():
     db = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        passwd="root",
-        database="student_database"
+        host=HOST,
+        user=USERNAME,
+        passwd=PASSWORD,
+        database=NAME
     )
 
     mycursor = db.cursor(buffered=True)
@@ -47,10 +46,10 @@ def course():
 @main_menu.route('/college_table', methods=['post','get'])
 def college():
     db = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        passwd="root",
-        database="student_database"
+        host=HOST,
+        user=USERNAME,
+        passwd=PASSWORD,
+        database=NAME
     )
 
     mycursor = db.cursor(buffered=True)
