@@ -3,3 +3,6 @@ app/college/__pycache__/
 app/course/__pycache__/
 app/student/__pycache__/
 app/__pycache__/
+app/.env
+env
+Pipfile
